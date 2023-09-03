@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Products Core";
+}
+
+@model IEnumerable<ProductsViewModel>
+
+<div class="text-center">
+    <h1 class="display-4">Products</h1>
+    <p>Here we will attempt to show the products from the .NET Standard data layer</p>
+    <div class="d-flex flex-column text-start">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4">
+                <h4>@($"{product.Id}. {product.Name}")</h4>
+                <p>@product.Category</p>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Product Details";
+}
+
+@model ProductsViewModel
+
+<h1>Product Details</h1>
+<p>Here you can view and edit the details of a product</p>
+
+<dl class="row">
+    <dt class="col-sm-2">ID:</dt>
+    <dd class="col-sm-10">@Model.Id</dd>
+
+    <dt class="col-sm-2">Name:</dt>
+    <dd class="col-sm-10">
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </dd>
+
+    <dt class="col-sm-2">Category:</dt>
+    <dd class="col-sm-10">
+        <input asp-for="Category" class="form-control" />
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </dd>
+</dl>
+
+<div class="form-group">
+    <button type="submit" class="btn btn-primary">Save</button>
+</div>
+

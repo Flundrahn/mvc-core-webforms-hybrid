@@ -32,11 +32,11 @@ namespace Data.Configuration
                    .ShowSql())
                .Mappings(m => m.AutoMappings
                    .Add(AutoMap.AssemblyOf<Product>().Where(a => a.Namespace == "Data.Entities")))
-               .ExposeConfiguration(cfg =>
-                {
-                    var schemaExport = new SchemaExport(cfg);
-                    schemaExport.Create(false, true);
-                })
+               //.ExposeConfiguration(cfg =>
+               // {
+               //     var schemaExport = new SchemaExport(cfg);
+               //     schemaExport.Create(false, true);
+               // })
                .BuildSessionFactory();
         }
 
