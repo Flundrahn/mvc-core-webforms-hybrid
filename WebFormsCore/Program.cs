@@ -1,4 +1,6 @@
 
+using Data.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSystemWebAdapters();
 builder.Services.AddHttpForwarder();
@@ -22,5 +24,7 @@ app.UseSystemWebAdapters();
 
 app.MapDefaultControllerRoute();
 app.MapForwarder("/{**catch-all}", app.Configuration["ProxyTo"]).Add(static builder => ((RouteEndpointBuilder)builder).Order = int.MaxValue);
+
+NhibernateHelper.InitSessionFactory();
 
 app.Run();

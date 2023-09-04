@@ -8,7 +8,7 @@ namespace Data.Configuration
 {
     public static class NhibernateHelper
     {
-        private const string ConnectionString = @"Data Source=localhost;Initial Catalog=MvcWebFormsHybrid;Integrated Security=True";
+        private const string ConnectionString = @"Data Source=localhost;Initial Catalog=MvcCoreWebFormsHybrid;Integrated Security=True";
         private static ISessionFactory _sessionFactory;
 
         public static ISessionFactory SessionFactory
@@ -21,6 +21,11 @@ namespace Data.Configuration
                 }
                 return _sessionFactory;
             }
+        }
+
+        public static void InitSessionFactory()
+        {
+            _sessionFactory = CreateSessionFactory();
         }
 
         private static ISessionFactory CreateSessionFactory()
@@ -38,23 +43,5 @@ namespace Data.Configuration
                // })
                .BuildSessionFactory();
         }
-
-        //private FluentConfiguration GetConfiguration()
-        //{
-        //    return
-        //}
-
-        //public void Migrate()
-        //{
-        //    var cfg = new Configuration();
-        //    cfg.Configure()
-
-        //    new SchemaExport(GetConfiguration().BuildConfiguration()).Execute(true, true, false);
-        //}
     }
 }
-
-//		Message	"The entity 'NhibernateHelper' doesn't have an Id mapped. Use the Id method to map your identity property. For example: Id(x => x.Id)."	string
-//+		RelatedEntity	{Name = "NhibernateHelper" FullName = "Data.Configuration.NhibernateHelper"}	System.Type {System.RuntimeType}
-//		Resolution	"Use the Id method to map your identity property. For example: Id(x => x.Id)"	string
-//		Source	"FluentNHibernate"	string
