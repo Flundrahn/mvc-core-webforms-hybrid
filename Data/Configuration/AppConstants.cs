@@ -2,6 +2,6 @@
 {
     public static class AppConstants
     {
-        public const string Name = "Blazor WebForms Hybrid";
+        public const string Name = "MVC Core WebForms Hybrid";
     }
 }

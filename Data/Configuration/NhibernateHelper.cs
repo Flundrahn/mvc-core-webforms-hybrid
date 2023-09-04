@@ -3,13 +3,12 @@ using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using NHibernate.Tool.hbm2ddl;
 
 namespace Data.Configuration
 {
     public static class NhibernateHelper
     {
-        private const string ConnectionString = @"Data Source=localhost;Initial Catalog=BlazorWebFormsHybrid;Integrated Security=True";
+        private const string ConnectionString = @"Data Source=localhost;Initial Catalog=MvcWebFormsHybrid;Integrated Security=True";
         private static ISessionFactory _sessionFactory;
 
         public static ISessionFactory SessionFactory
