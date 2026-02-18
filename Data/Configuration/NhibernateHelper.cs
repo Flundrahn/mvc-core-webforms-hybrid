@@ -3,44 +3,39 @@ using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Tool.hbm2ddl;
+using System;
 
 namespace Data.Configuration
 {
-    public static class NhibernateHelper
+    public static class NHibernateHelper
     {
-        private const string ConnectionString = @"Data Source=localhost;Initial Catalog=MvcCoreWebFormsHybrid;Integrated Security=True";
         private static ISessionFactory _sessionFactory;
+        public static ISessionFactory SessionFactory => _sessionFactory 
+            ?? throw new InvalidOperationException("SessionFactory is not initialized. Call InitSessionFactory with a valid connection string before accessing it.");
 
-        public static ISessionFactory SessionFactory
+        public static void InitSessionFactory(string connectionString)
         {
-            get
+            if (string.IsNullOrEmpty(connectionString))
             {
-                if (_sessionFactory is null)
-                {
-                    _sessionFactory = CreateSessionFactory();
-                }
-                return _sessionFactory;
+                throw new InvalidOperationException("Connection string is null or empty. Please provide a valid connection string to initialize the SessionFactory.");
             }
+            _sessionFactory = CreateSessionFactory(connectionString);
         }
 
-        public static void InitSessionFactory()
-        {
-            _sessionFactory = CreateSessionFactory();
-        }
-
-        private static ISessionFactory CreateSessionFactory()
+        private static ISessionFactory CreateSessionFactory(string connectionString)
         {
             return Fluently.Configure()
                .Database(MsSqlConfiguration.MsSql2012
-                   .ConnectionString(ConnectionString)
+                   .ConnectionString(connectionString)
                    .ShowSql())
                .Mappings(m => m.AutoMappings
                    .Add(AutoMap.AssemblyOf<Product>().Where(a => a.Namespace == "Data.Entities")))
-               //.ExposeConfiguration(cfg =>
-               // {
-               //     var schemaExport = new SchemaExport(cfg);
-               //     schemaExport.Create(false, true);
-               // })
+               .ExposeConfiguration(cfg =>
+                {
+                    var schemaExport = new SchemaExport(cfg);
+                    schemaExport.Create(false, true);
+                })
                .BuildSessionFactory();
         }
     }

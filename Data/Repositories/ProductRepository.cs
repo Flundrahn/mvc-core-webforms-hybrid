@@ -11,7 +11,7 @@ namespace Data.Repositories
         {
         }
 
-        public ProductRepository() : base(NhibernateHelper.SessionFactory.OpenSession())
+        public ProductRepository() : base(NHibernateHelper.SessionFactory.OpenSession())
         {
         }
     }
