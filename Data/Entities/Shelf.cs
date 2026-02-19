@@ -11,5 +11,8 @@ namespace Data.Entities
         {
             Products = new List<Product>();
         }
+
+        // Required for NHibernate proxy generation in .NET 10+
+        protected internal virtual new object MemberwiseClone() => base.MemberwiseClone();
     }
 }

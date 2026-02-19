@@ -120,3 +120,71 @@ Status: Complete
 
 Success - .NET 6.0 baseline established, ready for commit (action 7 pending manual git commit)
 
+
+## [2026-02-19 16:35] TASK-002: Create integration tests on .NET 6.0
+
+Status: Complete
+
+- **Verified**: Test database created and accessible
+- **Commits**: "Add integration tests for AspNetCoreMvc on .NET 6.0"
+- **Files Created**: AspNetCoreMvc.IntegrationTests project files (ApplicationTests.cs, RepositoryMethodTests.cs, NHibernateIntegrationTests.cs, NHibernateFixture.cs, appsettings.Testing.json)
+- **Files Modified**: 
+  - AspNetCoreMvc.IntegrationTests.csproj (project references, packages, configuration)
+  - AspNetCoreMvc/appsettings.json (added NHibernate.ShowSql setting)
+  - AspNetCoreMvc/Program.cs (reads and uses ShowSql from configuration)
+  - AspNetWebForms/Web.config (added NHibernate.ShowSql appSetting)
+  - AspNetWebForms/Global.asax.cs (reads and uses ShowSql from configuration)
+  - mvc-core-webforms-hybrid.sln (test project added)
+- **Code Changes**: 
+  - Created comprehensive integration test suite with 13 tests
+  - Added NHibernateFixture for shared test initialization with configuration support
+  - Updated both applications to control SQL logging via configuration
+  - Consistent ShowSql behavior across all projects
+- **Tests**: All 13 integration tests pass on .NET 6.0 baseline (100% pass rate)
+- **Build Status**: Successful with 0 errors
+
+Success - .NET 6.0 baseline established with integration tests, committed and ready for upgrade
+
+
+## [2026-02-19 16:36] TASK-003: Atomic framework and package upgrade
+
+Status: Complete
+
+- **Files Modified**: 
+  - AspNetCoreMvc/AspNetCoreMvc.csproj (TargetFramework updated from net6.0 to net10.0)
+  - AspNetCoreMvc.IntegrationTests/AspNetCoreMvc.IntegrationTests.csproj (TargetFramework updated from net6.0 to net10.0)
+- **Code Changes**: 
+  - Updated TargetFramework to net10.0 in both projects
+  - No package removals needed (System.Net.Http and System.Text.RegularExpressions already absent)
+- **Verified**: All NuGet packages restored successfully
+- **Build Status**: 
+  - AspNetCoreMvc builds successfully with 0 errors (2 nullable warnings - non-blocking)
+  - AspNetCoreMvc.IntegrationTests builds successfully with 0 errors
+  - Data library builds successfully
+  - All projects on target frameworks
+
+Success - Framework upgrade complete, all builds successful with 0 errors
+
+
+## [2026-02-19 16:42] TASK-004: Run integration tests and finalize
+
+Status: Complete
+
+- **Files Modified**:
+  - AspNetCoreMvc/AspNetCoreMvc.csproj (NHibernate 5.4.9→5.6.0, FluentNHibernate 3.2.0→3.4.1)
+  - Data/Data.csproj (NHibernate 5.4.9→5.6.0, FluentNHibernate 3.2.0→3.4.1)
+  - Data/Entities/Product.cs (added protected internal virtual new MemberwiseClone())
+  - Data/Entities/Shelf.cs (added protected internal virtual new MemberwiseClone())
+- **Code Changes**:
+  - Updated NHibernate to 5.6.0 for .NET 10 compatibility
+  - Updated FluentNHibernate to 3.4.1 for .NET 10 compatibility
+  - Fixed .NET 10 proxy generation requirement by adding MemberwiseClone overrides to entity classes
+- **Tests**: All 13 integration tests pass on .NET 10.0 (100% pass rate):
+  - ApplicationTests: 3/3 passing
+  - RepositoryMethodTests: 5/5 passing  
+  - NHibernateIntegrationTests: 5/5 passing
+- **Verified**: No regressions detected between .NET 6.0 and .NET 10.0
+- **Build Status**: Successful with 1 warning (nullable reference - non-blocking)
+
+Success - All integration tests pass on .NET 10.0, no regressions detected, ready for commit
+
