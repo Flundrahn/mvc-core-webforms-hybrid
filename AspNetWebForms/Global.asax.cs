@@ -17,7 +17,12 @@ namespace WebForms
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            NHibernateHelper.InitSessionFactory(connectionString);
+
+            // Read ShowSql setting from configuration
+            var showSqlSetting = ConfigurationManager.AppSettings["NHibernate.ShowSql"];
+            var showSql = bool.TryParse(showSqlSetting, out var result) ? result : false;
+
+            NHibernateHelper.InitSessionFactory(connectionString, showSql);
 
             AddInitialData();
         }

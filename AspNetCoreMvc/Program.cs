@@ -24,7 +24,13 @@ app.UseSystemWebAdapters();
 app.MapDefaultControllerRoute();
 app.MapForwarder("/{**catch-all}", app.Configuration["ProxyTo"]).Add(static builder => ((RouteEndpointBuilder)builder).Order = int.MaxValue);
 
-string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-NHibernateHelper.InitSessionFactory(connectionString);
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string is required.");
+
+var showSql = builder.Configuration.GetValue<bool>("NHibernate:ShowSql", defaultValue: false);
+NHibernateHelper.InitSessionFactory(connectionString, showSql);
 
 app.Run();
+
+// Make Program class accessible for integration testing
+public partial class Program { }
