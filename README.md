@@ -1,5 +1,10 @@
 # mvc-core-webforms-hybrid
-To experiment with using YARP to combine an ASP.NET Core MVC app with an ASP.NET Web Forms app that both use the same NHibernate data layer.
+
+An experimental solution to test a practical approach to migrating legacy apps using the Strangler Fig pattern:
+
+- **Data Layer**: A .NET Standard 2.0 library the same code is possible to run in both .NET Framework and .NET Core apps
+- **Dual apps**: Runs both an ASP.NET Web Forms app (.NET Framework 4.8) and an ASP.NET Core MVC app (.NET 10) in parallel, using YARP to direct users between.
+- **Migration Strategy**: Showcases how to gradually migrate functionality from a legacy Web Forms app to a modern ASP.NET Core app while maintaining a seamless user experience
 
 ## Requirements
 - Microsoft SQL Server must be installed and running
@@ -13,14 +18,6 @@ To experiment with using YARP to combine an ASP.NET Core MVC app with an ASP.NET
 - open in Visual Studio
 - build and run
 
-# ToDo
-- migrate mvc app to .net 10
-- make the UI identical to showcase possible approach to make the two apps seamless to users
-- make nicer description of project
+## Update 19/2/2026
 
-# Draft project description
-NOTE - clean this up after finishing
-
-## About project and stuff
-- Data is .NET Standard library that can be used by both .NET Framework and .NET Core
-- Runs a WebForms app and an MVC Core app in parallell to demonstrate possible approach to strangle fig pattern way of migrating a legacy app
+I ran the new `Modernization experience` with copilot in VS 2026 with this project, to handle the upgrade the MVC app from .NET 6 to .NET 10. It was interesting and successful. It generated a mostly solid plan, and identified the necessary dependencies that needed handling. My own contribution was to ensure adding some integration tests before the update, make sure they were green both before and after. This was good since it helped identify and quickly fix a breaking change concerning NHibernate and virtual properties, which was solved by overriding MemberwiseClone and updating the packages for NHibernate and FluentNHibernate.

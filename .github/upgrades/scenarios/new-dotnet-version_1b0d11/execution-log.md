@@ -188,3 +188,25 @@ Status: Complete
 
 Success - All integration tests pass on .NET 10.0, no regressions detected, ready for commit
 
+
+## [2026-02-19 16:43] TASK-004: Run integration tests and finalize
+
+Status: Complete
+
+- **Commits**: "Upgrade AspNetCoreMvc from .NET 6.0 to .NET 10.0"
+- **Files Modified**:
+  - AspNetCoreMvc/AspNetCoreMvc.csproj (TargetFramework: net6.0→net10.0, NHibernate: 5.4.9→5.6.0, FluentNHibernate: 3.2.0→3.4.1)
+  - AspNetCoreMvc.IntegrationTests/AspNetCoreMvc.IntegrationTests.csproj (TargetFramework: net6.0→net10.0)
+  - Data/Data.csproj (NHibernate: 5.4.9→5.6.0, FluentNHibernate: 3.2.0→3.4.1)
+  - Data/Entities/Product.cs (added MemberwiseClone override)
+  - Data/Entities/Shelf.cs (added MemberwiseClone override)
+- **Code Changes**:
+  - Framework upgrade from .NET 6.0 to .NET 10.0
+  - Package updates for .NET 10 compatibility (NHibernate 5.6.0, FluentNHibernate 3.4.1)
+  - Entity proxy compatibility fixes for .NET 10 stricter proxy requirements
+- **Tests**: All 13 integration tests pass on .NET 10.0 (100% pass rate, no regressions)
+- **Verified**: No test regressions between .NET 6.0 and .NET 10.0
+- **Build Status**: Successful with 0 errors, 1 nullable reference warning (non-blocking)
+
+Success - Upgrade complete with all tests passing, changes committed
+
