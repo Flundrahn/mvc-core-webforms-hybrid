@@ -1,10 +1,12 @@
 # mvc-core-webforms-hybrid
 
-An experimental solution to test a practical approach to migrating legacy apps using the Strangler Fig pattern:
+An experimental solution to test a practical approach to start migrating legacy apps using the Strangler Fig pattern with YARP:
 
 - **Data Layer**: A .NET Standard 2.0 library the same code is possible to run in both .NET Framework and .NET Core apps
 - **Dual apps**: Runs both an ASP.NET Web Forms app (.NET Framework 4.8) and an ASP.NET Core MVC app (.NET 10) in parallel, using YARP to direct users between.
 - **Migration Strategy**: Showcases how to gradually migrate functionality from a legacy Web Forms app to a modern ASP.NET Core app while maintaining a seamless user experience
+
+NOTE that since YARP runs in the ASP.NET Core MVC app, only traffic there can be proxied between the two apps, if a user would surf directly to the Web Forms app, then the link in the nav bar to the new Products page won't work.
 
 ## Requirements
 - Microsoft SQL Server must be installed and running

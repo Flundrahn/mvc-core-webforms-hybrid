@@ -50,7 +50,8 @@
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/ProductsOld">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/ProductsOld">Products - ASP.NET WebForms</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Products">Products - ASP.NET Core MVC</a></li>
                     </ul>
                 </div>
             </div>
